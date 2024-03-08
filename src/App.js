@@ -67,10 +67,10 @@ function Logo() {
 	);
 }
 
-function NumResults() {
+function NumResults({ movies }) {
 	return (
 		<p className='num-results'>
-			Found <strong>X</strong> results
+			Found <strong>{movies.length}</strong> results
 		</p>
 	);
 }
@@ -204,24 +204,48 @@ function Main({ children }) {
 	return <main className='main'>{children}</main>;
 }
 
+function Loader() {
+	return <p className='loader'>Loading...</p>;
+}
+
+function ErrorMessage({ message }) {
+	return (
+		<p className='error'>
+			<span>📛</span> {message}
+		</p>
+	);
+}
+
 const _key = "6f86c2aa";
+const query = "Flash";
 
 export default function App() {
 	const [movies, setMovies] = useState([]);
-
 	const [watched, setWatched] = useState([]);
+	const [loading, setLoading] = useState(false);
+	const [error, setError] = useState("");
 
 	useEffect(function () {
-		try {
-			fetch(`http://omdbapi.com/?s=Flash&apikey=${_key}`)
-				.then((res) => res.json())
-				.then((data) => {
-					console.log(data);
-					setMovies(data.Search);
-				});
-		} catch (error) {
-			console.error(error.message);
+		async function fetchData() {
+			try {
+				setLoading(true);
+				const res = await fetch(
+					`http://omdbapi.com/?s=${query}&apikey=${_key}`
+				);
+
+				if (!res.ok)
+					throw new Error("Something went wrong while fetching data");
+
+				const data = await res.json();
+				setMovies(data.Search);
+			} catch (err) {
+				setError(err.message);
+				console.error(err.message);
+			} finally {
+				setLoading(false);
+			}
 		}
+		fetchData();
 	}, []);
 
 	return (
@@ -232,7 +256,9 @@ export default function App() {
 			</NavBar>
 			<Main>
 				<Box>
-					<MovieList movies={movies} />
+					{!loading && !error && <MovieList movies={movies} />}
+					{loading && <Loader />}
+					{error && <ErrorMessage message={error} />}
 				</Box>
 				<Box className='watched'>
 					<WatchedMovieSummary watched={watched} />
