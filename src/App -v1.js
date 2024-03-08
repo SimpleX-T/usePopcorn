@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const tempMovieData = [
 	{
@@ -102,7 +102,7 @@ function Movie({ movie }) {
 function MovieList({ movies }) {
 	return (
 		<ul className='list'>
-			{movies.map((movie) => (
+			{movies?.map((movie) => (
 				<Movie movie={movie} key={movie.imdbID} />
 			))}
 		</ul>
@@ -177,7 +177,7 @@ function WatchedMovie({ movie }) {
 
 function WatchedMovieList({ watched }) {
 	return (
-		<ul className={`list`}>
+		<ul className='list'>
 			{watched.map((movie) => (
 				<WatchedMovie movie={movie} key={movie.imdbID} />
 			))}
@@ -185,11 +185,11 @@ function WatchedMovieList({ watched }) {
 	);
 }
 
-function Box({ children, className }) {
+function Box({ children }) {
 	const [isOpen, setIsOpen] = useState(true);
 
 	return (
-		<div className={`box ${className}`}>
+		<div className='box'>
 			<button
 				className='btn-toggle'
 				onClick={() => setIsOpen((isOpen) => !isOpen)}>
@@ -204,25 +204,10 @@ function Main({ children }) {
 	return <main className='main'>{children}</main>;
 }
 
-const _key = "6f86c2aa";
-
 export default function App() {
-	const [movies, setMovies] = useState([]);
+	const [movies, setMovies] = useState(tempMovieData);
 
-	const [watched, setWatched] = useState([]);
-
-	useEffect(function () {
-		try {
-			fetch(`http://omdbapi.com/?s=Flash&apikey=${_key}`)
-				.then((res) => res.json())
-				.then((data) => {
-					console.log(data);
-					setMovies(data.Search);
-				});
-		} catch (error) {
-			console.error(error.message);
-		}
-	}, []);
+	const [watched, setWatched] = useState(tempWatchedData);
 
 	return (
 		<>
@@ -234,7 +219,7 @@ export default function App() {
 				<Box>
 					<MovieList movies={movies} />
 				</Box>
-				<Box className='watched'>
+				<Box>
 					<WatchedMovieSummary watched={watched} />
 					<WatchedMovieList watched={watched} />
 				</Box>

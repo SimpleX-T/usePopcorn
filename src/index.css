@@ -60,8 +60,20 @@ body {
 	max-width: 42rem;
 	background-color: var(--color-background-500);
 	border-radius: 0.9rem;
-	/* overflow-y: scroll; */
+	overflow-y: scroll;
+	scrollbar-color: var(--color-background-100) var(--color-background-500);
+	scrollbar-width: thin;
 	position: relative;
+}
+
+.box.watched {
+	scrollbar-width: none;
+
+	& .list {
+		overflow-y: scroll;
+		scrollbar-width: thin;
+		scrollbar-color: var(--color-background-100) var(--color-background-500);
+	}
 }
 
 .loader {
