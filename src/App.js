@@ -99,7 +99,7 @@ export default function App() {
 					setLoading(true);
 					setError("");
 					const res = await fetch(
-						`http://omdbapi.com/?s=${query}&apikey=${_key}`
+						`https://omdbapi.com/?s=${query}&apikey=${_key}`
 					);
 
 					if (!res.ok)

@@ -49,7 +49,7 @@ export default function MovieDetails({
 				setError("");
 				try {
 					const res = await fetch(
-						`http://www.omdbapi.com/?apikey=${apiKey}&i=${selectedId}`
+						`https://www.omdbapi.com/?apikey=${apiKey}&i=${selectedId}`
 					);
 
 					if (!res.ok) throw new Error("couldn't fetch data");
