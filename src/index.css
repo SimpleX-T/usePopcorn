@@ -345,10 +345,9 @@ body {
 	border: none;
 	background-color: var(--color-text);
 	color: var(--color-background-500);
-	box-shadow: 0 8px 15px rgba(0, 0, 0, 0.5);
-	font-family: sans-serif;
+	box-shadow: 0 3px 15px rgba(0, 0, 0, 0.3);
 	font-size: 2.4rem;
-	font-weight: bold;
+	font-weight: 900;
 	cursor: pointer;
 	z-index: 999;
 	display: flex;
