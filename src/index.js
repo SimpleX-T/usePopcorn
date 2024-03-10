@@ -3,22 +3,22 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 
-import StarRating from "./StarRating";
-
-// function Test() {
-// 	// const [movieRating, setMovieRating] = useState(0);
-// 	return (
-// 		<div>
-// 			<StarRating
-// 				color='blue'
-// 				size={30}
-// 				maxRating={7}
-// 				// onSetRating={setMovieRating}
-// 			/>
-// 			<p>This movie was rated {movieRating} star(s)</p>
-// 		</div>
-// 	);
-// }
+{
+	/*function Test() {
+	const [movieRating, setMovieRating] = useState(0);
+	return (
+		<div>
+			<StarRating
+				color='blue'
+				size={30}
+				maxRating={7}
+				onSetRating={setMovieRating}
+			/>
+			<p>This movie was rated {movieRating} star(s)</p>
+		</div>
+	);}
+	*/
+}
 
 ReactDOM.createRoot(document.getElementById("root")).render(
 	<React.StrictMode>
